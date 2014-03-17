@@ -3,7 +3,7 @@
 Plugin Name: Custom Admin Dashboard 
 Plugin URI: http://face3media.com
 Description: Clean your admin dashboard and create custom boxes with custom content (images, links, text, lists).  Access and modify your boxes on the settings menu under 'Custom Admin Dashboard'.  Created by Face3Media.  V. 1.0.1
-Version: 1.0.3
+Version: 1.0.4
 Author: Face3Media
 Author URI: http://face3media.com
 License: GPLv3 
@@ -16,7 +16,7 @@ if (!defined('CUSTOM_DASHBOARD_VERSION_KEY'))
     define('CUSTOM_DASHBOARD_VERSION_KEY', 'custom_dasboard_version');
 
 if (!defined('CUSTOM_DASHBOARD_VERSION_NUM'))
-    define('CUSTOM_DASHBOARD_VERSION_NUM', '1.0.1');
+    define('CUSTOM_DASHBOARD_VERSION_NUM', '1.0.4');
 
 add_option(CUSTOM_DASHBOARD_VERSION_KEY, CUSTOM_DASHBOARD_VERSION_NUM);
 
@@ -106,25 +106,36 @@ function face3_custom_admin_dashboard_options() {
         
         <div id="face3-content">
         
-            <p>Create your new dashboard boxes, you can insert images, links, html code.</p>
+            <p> <?php _e('Create your new dashboard boxes, you can insert images, links, html code.','face3media'); ?></p>
             
-            <form method="post" action="">
+             <form method="post" action="">
                 <?php settings_fields( 'face3_custom_admin_dashboard_group' ); ?>
                 
-              	<div class="option box">      
-                    Remove other default wordpress metaboxes?
-                    <?php $remove_metaboxes = get_option('remove_default_metaboxes'); ?>
-                    <input type="checkbox" name="remove_default_metaboxes" value="1"<?php checked( $remove_metaboxes,1 ); ?> />
+              	<h2><?php _e('Activate this plugin for the following roles:','face3media');?></h2>  
+            	
+              	<div class="option box">              		
+					<?php $options = get_option( 'show_to_user_role' ); ?>
+                    <input type="checkbox" name="show_to_user_role[Administrator]" value="1"<?php checked( isset( $options['Administrator'] ) ); ?> /> <?php _e('Administrator','face3media'); ?>
+                    <br><input type="checkbox" name="show_to_user_role[Editor]" value="1"<?php checked( isset( $options['Editor'] ) ); ?> /> <?php _e('Editor','face3media'); ?>        
+                    <br><input type="checkbox" name="show_to_user_role[Author]" value="1"<?php checked( isset( $options['Author'] ) ); ?> /> <?php _e('Author','face3media'); ?>          
+                    <br><input type="checkbox" name="show_to_user_role[Follower]" value="1"<?php checked( isset( $options['Follower'] ) ); ?> /> <?php _e('Follower','face3media'); ?>
+            	
               	</div>         
                    
-                <div class="row">                
+                <h2><?php _e('Add two customized widgets to dashboard','face3media');?></h2>
+                <div class="row">  
+                	<?php _e('Remove other default wordpress metaboxes?','face3media'); ?>
+                    <?php $remove_metaboxes = get_option('remove_default_metaboxes'); ?>
+                    <input type="checkbox" name="remove_default_metaboxes" value="1"<?php checked( $remove_metaboxes,1 ); ?> />
+            		<br><br>
+            		                     
                     <table class="form-table">
                         <tr valign="top">
-                        <th scope="row">First Box Title</th>
+                        <th scope="row"> <?php _e('First Box Title','face3media'); ?></th>
                         <td><input type="text" name="F3SP_input_1" value="<?php echo get_option('Box01Title'); ?>"/></td>
                         </tr>
                         <tr valign="top">
-                        <th scope="row">First Box Content</th>
+                        <th scope="row"> <?php _e('First Box Content','face3media'); ?></th>
                         <td><?php wp_editor( html_entity_decode(stripslashes(get_option('Box01Content'))), 'F3SP_input_2' ); ?></td>
                         </tr>
                         
@@ -134,25 +145,16 @@ function face3_custom_admin_dashboard_options() {
                 <div class="row">                
                     <table class="form-table">
                         <tr valign="top">
-                        <th scope="row">Second Box Title</th>
+                        <th scope="row"> <?php _e('Second Box Title','face3media'); ?></th>
                         <td><input type="text" name="F3SP_input_3" value="<?php echo get_option('Box02Title'); ?>"/></td>
                         </tr>
                         <tr valign="top">
-                        <th scope="row">Second Box Content</th>
+                        <th scope="row"> <?php _e('Second Box Content','face3media'); ?></th>
                         <td><?php wp_editor( html_entity_decode(stripslashes(get_option('Box02Content'))), 'F3SP_input_4' ); ?></td>
                         </tr>
                     </table>
                 </div> 
                 
-                <div class="option box">     
-            		Who should see these boxes?
-					<?php $options = get_option( 'show_to_user_role' ); ?>
-                    
-                    <br><input type="checkbox" name="show_to_user_role[Administrator]" value="1"<?php checked( isset( $options['Administrator'] ) ); ?> />Administrator
-                    <br><input type="checkbox" name="show_to_user_role[Editor]" value="1"<?php checked( isset( $options['Editor'] ) ); ?> />Editor        
-                    <br><input type="checkbox" name="show_to_user_role[Author]" value="1"<?php checked( isset( $options['Author'] ) ); ?> />Author          
-                    <br><input type="checkbox" name="show_to_user_role[Follower]" value="1"<?php checked( isset( $options['Follower'] ) ); ?> />Follower
-            	</div>
                 <?php submit_button(); ?>
             </form>            
              
