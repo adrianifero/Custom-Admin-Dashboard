@@ -3,7 +3,7 @@
 Plugin Name: Customize Admin Dashboard 
 Plugin URI: http://adriantoro.infoeplus.com
 Description: Clean your admin dashboard and create custom boxes with custom content (images, links, text, lists).  Access and modify your boxes on the settings menu under 'Custom Admin Dashboard'.
-Version: 1.0.1
+Version: 1.0.2
 Author: Adrian Toro
 Author URI: http://adriantoro.infoeplus.com
 License: GPLv3 
@@ -87,13 +87,13 @@ function cadashboard_options() {
 	<div class="wrap">
         <div id="cadashboard-header">
             <div id="cadashboard-background">
-                <h2><img src="<?php echo plugins_url( basename( dirname( __FILE__ ) ) . '/images/logo.png' ); ?>" width="40" height="auto"> Customize Admin Dashboard</h2>
+                <h2><img src="<?php echo plugins_url( basename( dirname( __FILE__ ) ) . '/images/logo.png' ); ?>" width="40" height="auto"><?php _e('Customize Admin Dashboard','cadashboard');?></h2>
             </div>
         </div>
         
         <div id="cadashboard-content">
         
-            <p>Use the two boxes below to create a personalized experience for your Dashboard. You can insert images, links, html code, etc.</p>
+            <p><?php _e('Use the two boxes below to create a personalized experience for your Dashboard. You can insert images, links, html code, etc.','cadashboard');?></p>
             
             <form method="post" action="">
                 <?php settings_fields( 'cadashboard_group' ); ?>
@@ -101,25 +101,25 @@ function cadashboard_options() {
               	<div class="option box">      
                     
                     <?php $remove_metaboxes = get_option('remove_default_metaboxes'); ?>
-                    <input type="checkbox" name="remove_default_metaboxes" value="1"<?php checked( $remove_metaboxes,1 ); ?> /> Remove ALL default wordpress metaboxes.
+                    <input type="checkbox" name="remove_default_metaboxes" value="1"<?php checked( $remove_metaboxes,1 ); ?> /><?php _e('Remove ALL default wordpress metaboxes.','cadashboard');?>
               	</div>         
                    
                 <div class="row cadashboard">             
                 	<h2>First Box</h2>   
                     <table class="form-table">
                         <tr valign="top">
-                        <th scope="row">Title:</th>
+                        <th scope="row"><?php _e('Title','cadashboard');?>:</th>
                         <td><input type="text" name="F3SP_input_1" value="<?php echo get_option('Box01Title'); ?>"/></td>
                         </tr>
                         <tr valign="top">
-                        <th scope="row">Content:</th>
+                        <th scope="row"><?php _e('Content','cadashboard');?>:</th>
                         <td><?php wp_editor( html_entity_decode(stripslashes(get_option('Box01Content'))), 'F3SP_input_2' ); ?></td>
                         </tr>
                         
                     </table>
                 
 					<div class="option box">     
-						Who should see the first box??
+						<?php _e('Who should see the first box','cadashboard');?>?
 						<?php $options = get_option( 'show_to_user_role' ); ?>
 					
 						<ul>
@@ -136,21 +136,21 @@ function cadashboard_options() {
             	<hr/>
                 
                 <div class="row cadashboard">                
-                	<h2>Second Box</h2>        
+                	<h2><?php _e('Second Box','cadashboard');?></h2>        
                     <table class="form-table">
                         <tr valign="top">
-                        <th scope="row">Title:</th>
+                        <th scope="row"><?php _e('Title','cadashboard');?>:</th>
                         <td><input type="text" name="F3SP_input_3" value="<?php echo get_option('Box02Title'); ?>"/></td>
                         </tr>
                         <tr valign="top">
-                        <th scope="row">Content:</th>
+                        <th scope="row"><?php _e('Content','cadashboard');?>:</th>
                         <td><?php wp_editor( html_entity_decode(stripslashes(get_option('Box02Content'))), 'F3SP_input_4' ); ?></td>
                         </tr>
                     </table>
 			
 			
 					<div class="option box">     
-						Who should see the second box?
+						<?php _e('Who should see the second box','cadashboard');?>?
 						<?php $options = get_option( 'show_to_user_role' ); ?>
 				
 						<ul>
@@ -196,11 +196,11 @@ add_action( 'activated_plugin', 'cadashboard_activation_redirect' );
 /* Define Variables
 ----------------------------------------------- */
 
-$first_widget_title = 'Edit this title';
-$first_widget_text = '<p style="text-align: justify;"><a href="#"><img class="alignleft" style="padding:15px;" title="www.blogacademyoflearning" src="http://placehold.it/80x80" alt="Custom Image"  style="max-width:200px;" /></a><p>Hello!</p><p style="text-align:justify;">I\'m your custom widget.   </p><p style="text-align:justify;">I\'m here to show important information and you can customize me by going to the settings menu and select "Custom Admin Dashboard".</p><p>You can use my to display your logo, or to place any image or embed any video you want.</p>';
+$first_widget_title = __('Edit this title','cadashboard');
+$first_widget_text = __('<p style="text-align: justify;"><a href="#"><img class="alignleft" style="padding:15px;" title="www.blogacademyoflearning" src="http://placehold.it/80x80" alt="Custom Image"  style="max-width:200px;" /></a><p>Hello!</p><p style="text-align:justify;">I\'m your custom widget.   </p><p style="text-align:justify;">I\'m here to show important information and you can customize me by going to the settings menu and select "Custom Admin Dashboard".</p><p>You can use my to display your logo, or to place any image or embed any video you want.</p>','cadashboard');
 
-$second_widget_title = 'Edit this title';
-$second_widget_text = '
+$second_widget_title = __('Edit this title','cadashboard');
+$second_widget_text = __('
 <p style="text-align: justify;"><strong><strong>You can embed videos on this widget, just paste the HTML code you want to display.  Follow these simple instructions:</strong></strong></p>
 <ol style="text-align: justify;">
 	<li>Go to the Youtube Video.</li>
@@ -212,7 +212,7 @@ $second_widget_text = '
 <p style="text-align: justify;" dir="ltr">You may also customize your own embeddable player by clicking on the embed code. When you click on the embed code the space below it will expand and reveal customization options.</p>
 
 <p>Now go and edit me on the settings menu, under "Custom Admin Dashboard" option</p>
-';
+','cadashboard');
 
 $option01 			= get_option('Box01Title');
 $option02 			= html_entity_decode(stripslashes(get_option('Box01Content')));
@@ -333,19 +333,6 @@ function cadashboard_remove_dashboard_meta_boxes(){
 		remove_meta_box('jetpack_summary_widget', 'dashboard', 'normal');
 		remove_meta_box('wpe_dify_news_feed', 'dashboard', 'normal');
 	
-		// Dashboard core widgets :: Left Column
-		
-		/*
-		unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_incoming_links']);
-		unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_recent_comments']);
-		unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_plugins']);
-		unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_right_now']);
-		// Additional dashboard core widgets :: Right Column
-		unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_recent_drafts']);
-		unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_quick_press']);
-		unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_primary']);
-		unset($wp_meta_boxes['dashboard']['side']['core']['dashboard_secondary']);
-		*/
 		// Remove the welcome panel
 		update_user_meta(get_current_user_id(), 'show_welcome_panel', false);
 		
