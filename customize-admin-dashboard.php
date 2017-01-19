@@ -3,7 +3,7 @@
 Plugin Name: Customize Admin Dashboard 
 Plugin URI: http://adriantoro.infoeplus.com
 Description: Clean your admin dashboard and create custom boxes with custom content (images, links, text, lists).  Access and modify your boxes on the settings menu under 'Custom Admin Dashboard'.
-Version: 1.0.2
+Version: 1.0.2a
 Author: Adrian Toro
 Author URI: http://adriantoro.infoeplus.com
 License: GPLv3 
